@@ -931,10 +931,14 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/videoPlayer */ "./src/js/modules/videoPlayer.js");
+
 
 window.addEventListener("DOMContentLoaded", function () {
   var slider = new _modules_slider__WEBPACK_IMPORTED_MODULE_0__["default"](".page", ".next");
   slider.render();
+  var player = new _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_1__["default"](".showup .play", ".overlay");
+  player.init();
 });
 
 /***/ }),
@@ -1015,6 +1019,78 @@ function () {
   }]);
 
   return Slider;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/modules/videoPlayer.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/videoPlayer.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VideoPlayer; });
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var VideoPlayer =
+/*#__PURE__*/
+function () {
+  function VideoPlayer(triggers, overlay) {
+    var _this = this;
+
+    _classCallCheck(this, VideoPlayer);
+
+    this.triggers = document.querySelectorAll(triggers);
+    this.overlay = document.querySelector(overlay);
+    this.closeBtn = document.querySelector("".concat(overlay, " .close"));
+    this.closeBtn.addEventListener("click", function () {
+      _this.overlay.style.display = "none";
+      document.querySelector("#frame").remove();
+      var div = document.createElement("div");
+      div.setAttribute("id", "frame");
+      document.querySelector("".concat(overlay, " .video")).prepend(div);
+    });
+  }
+
+  _createClass(VideoPlayer, [{
+    key: "createPlayer",
+    value: function createPlayer(url) {
+      this.player = new YT.Player('frame', {
+        height: '100%',
+        width: '100%',
+        videoId: "".concat(url)
+      });
+      this.overlay.style.display = "flex";
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var _this2 = this;
+
+      this.triggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function () {
+          var path = trigger.getAttribute("data-url");
+
+          _this2.createPlayer(path);
+        });
+      });
+    }
+  }]);
+
+  return VideoPlayer;
 }();
 
 
