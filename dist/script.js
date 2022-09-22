@@ -982,10 +982,19 @@ function () {
         this.slideIndex = this.slides.length - 1;
       }
 
+      if (n == 2) {
+        setTimeout(function () {
+          document.querySelector(".hanson").classList.add("active");
+        }, 3000);
+      } else {
+        document.querySelector(".hanson").classList.remove("active");
+      }
+
       this.slides.forEach(function (slide) {
         slide.style.display = "none";
       });
       this.slides[this.slideIndex].style.display = "block";
+      this.slides[this.slideIndex].classList.add("animated", "fadeIn");
     }
   }, {
     key: "plusSlide",

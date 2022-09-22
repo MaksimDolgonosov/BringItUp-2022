@@ -826,12 +826,24 @@ a:active {
 
 .modules__info .hanson {
     position: absolute;
+    bottom: -100%;
+    width: 455px;
+    height: 164px;
+    background: url(../img/hanson.png) center center no-repeat;
+    box-shadow: 0 -10px 20px rgba(0, 0, 0, .05);
+    padding: 26px 84px 30px 181px;
+    transition: 1s all ;
+}
+
+.modules__info .hanson.active{
+    position: absolute;
     bottom: 0;
     width: 455px;
     height: 164px;
     background: url(../img/hanson.png) center center no-repeat;
     box-shadow: 0 -10px 20px rgba(0, 0, 0, .05);
-    padding: 26px 84px 30px 181px
+    padding: 26px 84px 30px 181px;
+    transition: 1s all ;
 }
 
 .modules__info .hanson__title {
