@@ -2,7 +2,7 @@ export default class VideoPlayer {
     constructor(triggers, overlay) {
         this.triggers = document.querySelectorAll(triggers);
         this.overlay = document.querySelector(overlay);
-        this.closeBtn = document.querySelector(`${overlay} .close`);
+        this.closeBtn = this.overlay.querySelector(`.close`);
 
         this.closeBtn.addEventListener("click", () => {
             this.overlay.style.display = "none";

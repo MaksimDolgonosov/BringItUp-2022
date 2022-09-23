@@ -1,11 +1,9 @@
-export default class Slider {
-    constructor(page, btns) {
-        this.page = document.querySelector(page);
-        this.slides = this.page.children;
-        this.btns = document.querySelectorAll(btns);
-        this.slideIndex = 0;
-    }
+import Slider from "./slider";
 
+export default class MainSlider extends Slider {
+    constructor(page, btns) {
+        super(page, btns);
+    }
     showSlide(n) {
         if (n >= this.slides.length - 1) {
             this.slideIndex = 0;
@@ -13,8 +11,8 @@ export default class Slider {
         if (n < 0) {
             this.slideIndex = this.slides.length - 1;
         }
-        if (n==2) {
-            setTimeout(()=>{
+        if (n == 2) {
+            setTimeout(() => {
                 document.querySelector(".hanson").classList.add("active");
             }, 3000);
         } else {
