@@ -3,6 +3,7 @@ import Slider from "./slider";
 export default class MainSlider extends Slider {
     constructor(page, btns) {
         super(page, btns);
+
     }
     showSlide(n) {
         if (n >= this.slides.length - 1) {
@@ -35,6 +36,14 @@ export default class MainSlider extends Slider {
         this.btns.forEach(btn => {
             btn.addEventListener("click", e => {
                 this.plusSlide(1);
+            });
+        });
+        document.querySelectorAll(".sidecontrol a:not(.next)").forEach(slide => {
+            slide.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.slideIndex = 0;
+                this.showSlide(this.slideIndex);
+
             });
         });
     }

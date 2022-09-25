@@ -2761,7 +2761,7 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_mainslider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider/mainslider */ "./src/js/modules/slider/mainslider.js");
-/* harmony import */ var _modules_slider_miniSliderP1__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/miniSliderP1 */ "./src/js/modules/slider/miniSliderP1.js");
+/* harmony import */ var _modules_slider_miniSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/miniSlider */ "./src/js/modules/slider/miniSlider.js");
 /* harmony import */ var _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/videoPlayer */ "./src/js/modules/videoPlayer.js");
 
 
@@ -2772,12 +2772,33 @@ window.addEventListener("DOMContentLoaded", function () {
     btns: ".next"
   });
   slider.render();
-  var miniSliderP1 = new _modules_slider_miniSliderP1__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  var miniSliderP1 = new _modules_slider_miniSlider__WEBPACK_IMPORTED_MODULE_1__["default"]({
     page: ".showup__content-slider",
     prevBtn: ".showup__prev",
-    nextBtn: ".showup__next"
+    nextBtn: ".showup__next",
+    activeClass: "card-active",
+    animate: true,
+    autoplay: false
   });
   miniSliderP1.innit();
+  var miniSliderP3 = new _modules_slider_miniSlider__WEBPACK_IMPORTED_MODULE_1__["default"]({
+    page: ".modules__content-slider",
+    prevBtn: ".modules__info-btns .slick-prev",
+    nextBtn: ".modules__info-btns .slick-next",
+    activeClass: "card-active",
+    animate: true,
+    autoplay: true
+  });
+  miniSliderP3.innit();
+  var miniSliderP5 = new _modules_slider_miniSlider__WEBPACK_IMPORTED_MODULE_1__["default"]({
+    page: ".feed__slider",
+    prevBtn: ".feed__slider .slick-prev",
+    nextBtn: ".feed__slider .slick-next",
+    activeClass: "feed__item-active",
+    animate: false,
+    autoplay: false
+  });
+  miniSliderP5.innit();
   var player = new _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__["default"](".showup .play", ".overlay");
   player.init();
 });
@@ -2894,6 +2915,14 @@ function (_Slider) {
           _this.plusSlide(1);
         });
       });
+      document.querySelectorAll(".sidecontrol a:not(.next)").forEach(function (slide) {
+        slide.addEventListener("click", function (e) {
+          e.preventDefault();
+          _this.slideIndex = 0;
+
+          _this.showSlide(_this.slideIndex);
+        });
+      });
     }
   }]);
 
@@ -2904,16 +2933,16 @@ function (_Slider) {
 
 /***/ }),
 
-/***/ "./src/js/modules/slider/miniSliderP1.js":
-/*!***********************************************!*\
-  !*** ./src/js/modules/slider/miniSliderP1.js ***!
-  \***********************************************/
+/***/ "./src/js/modules/slider/miniSlider.js":
+/*!*********************************************!*\
+  !*** ./src/js/modules/slider/miniSlider.js ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MiniSliderP1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MiniSlider; });
 /* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
 /* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
@@ -2928,9 +2957,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
 /* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./slider */ "./src/js/modules/slider/slider.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./slider */ "./src/js/modules/slider/slider.js");
+
 
 
 
@@ -2960,36 +2992,90 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var MiniSliderP1 =
+var MiniSlider =
 /*#__PURE__*/
 function (_Slider) {
-  _inherits(MiniSliderP1, _Slider);
+  _inherits(MiniSlider, _Slider);
 
-  function MiniSliderP1(page, slides, nextBtn, prevBtn, activeClass) {
-    _classCallCheck(this, MiniSliderP1);
+  function MiniSlider(page, slides, nextBtn, prevBtn, activeClass, animate, autoplay) {
+    _classCallCheck(this, MiniSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MiniSliderP1).call(this, page, slides, nextBtn, prevBtn, activeClass));
+    return _possibleConstructorReturn(this, _getPrototypeOf(MiniSlider).call(this, page, slides, nextBtn, prevBtn, activeClass, animate, autoplay));
   }
 
-  _createClass(MiniSliderP1, [{
-    key: "showNextSlide",
-    value: function showNextSlide() {
+  _createClass(MiniSlider, [{
+    key: "showFirstSlide",
+    value: function showFirstSlide() {
+      this.slides[0].classList.add(this.activeClass);
+
+      if (this.animate) {
+        this.slides[0].querySelector(".card__controls-count").style.opacity = "1";
+        this.slides[0].querySelector(".card__controls-arrow").style.opacity = "1";
+        this.slides[0].querySelector(".card__title").style.opacity = "1";
+      }
+    }
+  }, {
+    key: "showAnotherSlides",
+    value: function showAnotherSlides() {
       var _this = this;
 
+      this.slides.forEach(function (slide) {
+        slide.classList.remove(_this.activeClass);
+
+        if (_this.animate) {
+          slide.querySelector(".card__controls-count").style.opacity = "0.5";
+          slide.querySelector(".card__controls-arrow").style.opacity = "0";
+          slide.querySelector(".card__title").style.opacity = "0.4";
+        }
+      });
+    }
+  }, {
+    key: "showNextSlide",
+    value: function showNextSlide() {
+      var _this2 = this;
+
       this.nextBtn.addEventListener("click", function () {
-        _this.page.append(_this.slides[0]);
+        _this2.page.append(_this2.slides[0]);
+
+        _this2.showAnotherSlides();
+
+        _this2.showFirstSlide();
+      });
+    }
+  }, {
+    key: "showPrevSlide",
+    value: function showPrevSlide() {
+      var _this3 = this;
+
+      this.prevBtn.addEventListener("click", function () {
+        _this3.page.prepend(_this3.slides[_this3.slides.length - 1]);
+
+        _this3.showAnotherSlides();
+
+        _this3.showFirstSlide();
       });
     }
   }, {
     key: "innit",
     value: function innit() {
-      this.page.style.cssText = "\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        flex-wrap: wrap;\n        overflow: hidden;";
+      var _this4 = this;
+
+      this.page.style.cssText = "\n        display: flex;\n        justify-content: space-arround;\n        align-items: flex-start;\n        flex-wrap: wrap;\n        overflow: hidden;";
+      this.showAnotherSlides();
+      this.showFirstSlide();
       this.showNextSlide();
+      this.showPrevSlide();
+
+      if (this.autoplay == true) {
+        setInterval(function () {
+          return _this4.nextBtn.click();
+        }, 5000);
+      }
     }
   }]);
 
-  return MiniSliderP1;
-}(_slider__WEBPACK_IMPORTED_MODULE_8__["default"]);
+  return MiniSlider;
+}(_slider__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
 
 
@@ -3018,7 +3104,9 @@ var Slider = function Slider() {
       _ref$prevBtn = _ref.prevBtn,
       prevBtn = _ref$prevBtn === void 0 ? null : _ref$prevBtn,
       _ref$activeClass = _ref.activeClass,
-      activeClass = _ref$activeClass === void 0 ? "" : _ref$activeClass;
+      activeClass = _ref$activeClass === void 0 ? "" : _ref$activeClass,
+      animate = _ref.animate,
+      autoplay = _ref.autoplay;
 
   _classCallCheck(this, Slider);
 
@@ -3028,6 +3116,9 @@ var Slider = function Slider() {
   this.slideIndex = 0;
   this.nextBtn = document.querySelector(nextBtn);
   this.prevBtn = document.querySelector(prevBtn);
+  this.activeClass = activeClass;
+  this.animate = animate;
+  this.autoplay = autoplay;
 };
 
 
