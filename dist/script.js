@@ -2763,6 +2763,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_mainslider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider/mainslider */ "./src/js/modules/slider/mainslider.js");
 /* harmony import */ var _modules_slider_miniSlider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/miniSlider */ "./src/js/modules/slider/miniSlider.js");
 /* harmony import */ var _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/videoPlayer */ "./src/js/modules/videoPlayer.js");
+/* harmony import */ var _modules_cards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/cards */ "./src/js/modules/cards.js");
+
 
 
 
@@ -2801,7 +2803,81 @@ window.addEventListener("DOMContentLoaded", function () {
   miniSliderP5.innit();
   var player = new _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__["default"](".showup .play", ".overlay");
   player.init();
+  var cardsOld = new _modules_cards__WEBPACK_IMPORTED_MODULE_3__["default"](".officerold", ".officerold .officer__card-item", ".officerold .plus");
+  cardsOld.init();
+  var cardsNew = new _modules_cards__WEBPACK_IMPORTED_MODULE_3__["default"](".officernew", ".officernew .officer__card-item", ".officernew .plus");
+  cardsNew.init();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/cards.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/cards.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Cards; });
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Cards =
+/*#__PURE__*/
+function () {
+  function Cards(cardsWrapper, cards, trigger) {
+    _classCallCheck(this, Cards);
+
+    this.cardsWrapper = document.querySelector(cardsWrapper);
+    console.log(this.cardsWrapper);
+    this.cards = document.querySelectorAll(cards);
+    this.lastCard = this.cards[this.cards.length - 1];
+    this.trigger = document.querySelector(trigger);
+    console.log(this.trigger);
+    this.cardIndex = 0;
+  }
+
+  _createClass(Cards, [{
+    key: "showCard",
+    value: function showCard() {
+      var _this = this;
+
+      this.trigger.addEventListener("click", function () {
+        if (_this.cardIndex == _this.cards.length - 2) {
+          _this.cards[_this.cardIndex].style.display = "flex";
+
+          _this.lastCard.remove();
+        } else {
+          _this.cards[_this.cardIndex].style.display = "flex";
+          _this.cardIndex += 1;
+        }
+      });
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      this.cards.forEach(function (card) {
+        card.style.display = "none";
+        card.classList.add("animated", "fadeInDown");
+      });
+      this.lastCard.style.display = "flex";
+      this.showCard();
+    }
+  }]);
+
+  return Cards;
+}();
+
+
 
 /***/ }),
 
