@@ -4972,6 +4972,13 @@ window.addEventListener("DOMContentLoaded", function () {
     btns: ".next"
   });
   slider.render();
+  var moduleSlider = new _modules_slider_mainslider__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    page: ".moduleapp",
+    btns: ".next",
+    prevBtn: ".prevmodule",
+    nextBtn: ".nextmodule"
+  });
+  moduleSlider.render();
   var miniSliderP1 = new _modules_slider_miniSlider__WEBPACK_IMPORTED_MODULE_1__["default"]({
     page: ".showup__content-slider",
     prevBtn: ".showup__prev",
@@ -5065,12 +5072,14 @@ function () {
   }, {
     key: "init",
     value: function init() {
-      this.cards.forEach(function (card) {
-        card.style.display = "none";
-        card.classList.add("animated", "fadeInDown");
-      });
-      this.lastCard.style.display = "flex";
-      this.showCard();
+      try {
+        this.cards.forEach(function (card) {
+          card.style.display = "none";
+          card.classList.add("animated", "fadeInDown");
+        });
+        this.lastCard.style.display = "flex";
+        this.showCard();
+      } catch (e) {}
     }
   }]);
 
@@ -5245,9 +5254,11 @@ function () {
   }, {
     key: "init",
     value: function init() {
-      this.sendForm(this.form);
-      this.checkInputs();
-      this.phoneMask();
+      try {
+        this.sendForm(this.form);
+        this.checkInputs();
+        this.phoneMask();
+      } catch (e) {}
     }
   }]);
 
@@ -5322,10 +5333,10 @@ var MainSlider =
 function (_Slider) {
   _inherits(MainSlider, _Slider);
 
-  function MainSlider(page, btns) {
+  function MainSlider(page, btns, slides, nextBtn, prevBtn, slideIndex) {
     _classCallCheck(this, MainSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, page, btns));
+    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, page, btns, slides, nextBtn, prevBtn, slideIndex));
   }
 
   _createClass(MainSlider, [{
@@ -5339,12 +5350,14 @@ function (_Slider) {
         this.slideIndex = this.slides.length - 1;
       }
 
-      if (n == 2) {
-        setTimeout(function () {
-          document.querySelector(".hanson").classList.add("active");
-        }, 3000);
-      } else {
-        document.querySelector(".hanson").classList.remove("active");
+      if (document.querySelector(".hanson")) {
+        if (n == 2) {
+          setTimeout(function () {
+            document.querySelector(".hanson").classList.add("active");
+          }, 3000);
+        } else {
+          document.querySelector(".hanson").classList.remove("active");
+        }
       }
 
       this.slides.forEach(function (slide) {
@@ -5363,19 +5376,33 @@ function (_Slider) {
     value: function render() {
       var _this = this;
 
-      this.btns.forEach(function (btn) {
-        btn.addEventListener("click", function (e) {
-          _this.plusSlide(1);
+      if (this.page) {
+        this.btns.forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            _this.plusSlide(1);
+          });
         });
-      });
-      document.querySelectorAll(".sidecontrol a:not(.next)").forEach(function (slide) {
-        slide.addEventListener("click", function (e) {
-          e.preventDefault();
-          _this.slideIndex = 0;
+        document.querySelectorAll(".prevmodule").forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            _this.plusSlide(-1);
+          });
+        });
+        document.querySelectorAll(".nextmodule").forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
 
-          _this.showSlide(_this.slideIndex);
+            _this.plusSlide(1);
+          });
         });
-      });
+        document.querySelectorAll(".sidecontrol a:not(.next)").forEach(function (slide) {
+          slide.addEventListener("click", function (e) {
+            e.preventDefault();
+            _this.slideIndex = 0;
+
+            _this.showSlide(_this.slideIndex);
+          });
+        });
+      }
     }
   }]);
 
@@ -5535,17 +5562,19 @@ function (_Slider) {
     value: function innit() {
       var _this4 = this;
 
-      this.page.style.cssText = "\n        display: flex;\n        justify-content: space-arround;\n        align-items: flex-start;\n        flex-wrap: wrap;\n        overflow: hidden;";
-      this.showAnotherSlides();
-      this.showFirstSlide();
-      this.showNextSlide();
-      this.showPrevSlide();
+      try {
+        this.page.style.cssText = "\n            display: flex;\n            justify-content: space-arround;\n            align-items: flex-start;\n            flex-wrap: wrap;\n            overflow: hidden;";
+        this.showAnotherSlides();
+        this.showFirstSlide();
+        this.showNextSlide();
+        this.showPrevSlide();
 
-      if (this.autoplay == true) {
-        setInterval(function () {
-          return _this4.nextBtn.click();
-        }, 5000);
-      }
+        if (this.autoplay == true) {
+          setInterval(function () {
+            return _this4.nextBtn.click();
+          }, 5000);
+        }
+      } catch (e) {}
     }
   }]);
 
@@ -5586,7 +5615,11 @@ var Slider = function Slider() {
   _classCallCheck(this, Slider);
 
   this.page = document.querySelector(page);
-  this.slides = this.page.children;
+
+  try {
+    this.slides = this.page.children;
+  } catch (e) {}
+
   this.btns = document.querySelectorAll(btns);
   this.slideIndex = 0;
   this.nextBtn = document.querySelector(nextBtn);

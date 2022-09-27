@@ -7,6 +7,9 @@ import Forms from "./modules/form";
 window.addEventListener("DOMContentLoaded", () => {
     const slider = new MainSlider({ page: ".page", btns: ".next" });
     slider.render();
+    const moduleSlider = new MainSlider({ page: ".moduleapp", btns: ".next", prevBtn: ".prevmodule", nextBtn: ".nextmodule" });
+    moduleSlider.render();
+    
     const miniSliderP1 = new MiniSlider({ page: ".showup__content-slider", prevBtn: ".showup__prev", nextBtn: ".showup__next", activeClass: "card-active", animate: true, autoplay: false });
     miniSliderP1.innit();
     const miniSliderP3 = new MiniSlider({ page: ".modules__content-slider", prevBtn: ".modules__info-btns .slick-prev", nextBtn: ".modules__info-btns .slick-next", activeClass: "card-active", animate: true, autoplay: true });
@@ -15,14 +18,14 @@ window.addEventListener("DOMContentLoaded", () => {
     miniSliderP5.innit();
     const player = new VideoPlayer(".showup .play", ".overlay");
     player.init();
-    const cardsOld = new Cards(".officerold",".officerold .officer__card-item", ".officerold .plus");
+    const cardsOld = new Cards(".officerold", ".officerold .officer__card-item", ".officerold .plus");
     cardsOld.init();
-    const cardsNew = new Cards(".officernew",".officernew .officer__card-item", ".officernew .plus");
+    const cardsNew = new Cards(".officernew", ".officernew .officer__card-item", ".officernew .plus");
     cardsNew.init();
     const form1 = new Forms("form");
     form1.init();
     const form2 = new Forms(".scheduleForm");
     form2.init();
-    
+
 
 });

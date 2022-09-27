@@ -25,11 +25,15 @@ export default class Cards {
 
 
     init() {
-        this.cards.forEach(card => {
-            card.style.display = "none";
-            card.classList.add("animated", "fadeInDown");
-        });
-        this.lastCard.style.display = "flex";
-        this.showCard();
+        try {
+            this.cards.forEach(card => {
+                card.style.display = "none";
+                card.classList.add("animated", "fadeInDown");
+            });
+            this.lastCard.style.display = "flex";
+            this.showCard();
+        } catch (e) { }
+
+
     }
 }
