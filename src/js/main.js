@@ -1,6 +1,7 @@
 import MainSlider from "./modules/slider/mainslider";
 import MiniSlider from "./modules/slider/miniSlider";
 import VideoPlayer from "./modules/videoPlayer";
+import Forms from "./modules/form";
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -10,10 +11,14 @@ window.addEventListener("DOMContentLoaded", () => {
     miniSliderP1.innit();
     const miniSliderP3 = new MiniSlider({ page: ".modules__content-slider", prevBtn: ".modules__info-btns .slick-prev", nextBtn: ".modules__info-btns .slick-next", activeClass: "card-active", animate: true, autoplay: true });
     miniSliderP3.innit();
-    const miniSliderP5 = new MiniSlider({ page: ".feed__slider", prevBtn: ".feed__slider .slick-prev", nextBtn: ".feed__slider .slick-next", activeClass: "feed__item-active",animate: false, autoplay: false });
+    const miniSliderP5 = new MiniSlider({ page: ".feed__slider", prevBtn: ".feed__slider .slick-prev", nextBtn: ".feed__slider .slick-next", activeClass: "feed__item-active", animate: false, autoplay: false });
     miniSliderP5.innit();
     const player = new VideoPlayer(".showup .play", ".overlay");
     player.init();
+    const form = new Forms(".form");
+    form.init();
+    const secondForm = new Forms(".scheduleForm");
+    secondForm.init();
 
 
 });
