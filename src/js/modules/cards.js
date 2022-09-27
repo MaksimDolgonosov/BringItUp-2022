@@ -1,11 +1,9 @@
 export default class Cards {
     constructor(cardsWrapper, cards, trigger) {
         this.cardsWrapper = document.querySelector(cardsWrapper);
-        console.log(this.cardsWrapper);
         this.cards = document.querySelectorAll(cards);
         this.lastCard = this.cards[this.cards.length - 1];
         this.trigger = document.querySelector(trigger);
-        console.log(this.trigger);
         this.cardIndex = 0;
     }
 

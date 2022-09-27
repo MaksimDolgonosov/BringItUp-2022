@@ -2,6 +2,7 @@ import MainSlider from "./modules/slider/mainslider";
 import MiniSlider from "./modules/slider/miniSlider";
 import VideoPlayer from "./modules/videoPlayer";
 import Cards from "./modules/cards";
+import Forms from "./modules/form";
 
 window.addEventListener("DOMContentLoaded", () => {
     const slider = new MainSlider({ page: ".page", btns: ".next" });
@@ -18,5 +19,10 @@ window.addEventListener("DOMContentLoaded", () => {
     cardsOld.init();
     const cardsNew = new Cards(".officernew",".officernew .officer__card-item", ".officernew .plus");
     cardsNew.init();
+    const form1 = new Forms("form");
+    form1.init();
+    const form2 = new Forms(".scheduleForm");
+    form2.init();
+    
 
 });
