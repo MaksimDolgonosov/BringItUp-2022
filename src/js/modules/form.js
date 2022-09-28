@@ -77,11 +77,6 @@ export default class Forms {
     sendForm(form) {
         form.addEventListener("submit", e => {
             e.preventDefault();
-<<<<<<< HEAD
-            
-=======
-
->>>>>>> master
             let formData = new FormData(form);
             let div = document.createElement("h3");
             div.classList.add("animated", "fadeIn");
@@ -113,11 +108,7 @@ export default class Forms {
 
 
     init() {
-<<<<<<< HEAD
-        this.sendForm(this.form);
-        this.checkInputs();
-        this.phoneMask();
-=======
+
         try {
             this.sendForm(this.form);
             this.checkInputs();
@@ -125,6 +116,6 @@ export default class Forms {
         }
         catch (e) { }
 
->>>>>>> master
+
     }
 }

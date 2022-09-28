@@ -5,11 +5,7 @@ export default class MainSlider extends Slider {
         super(page, btns, slides, nextBtn, prevBtn, slideIndex);
     }
     showSlide(n) {
-<<<<<<< HEAD
         if (n >= this.slides.length ) {
-=======
-        if (n >= this.slides.length) {
->>>>>>> master
             this.slideIndex = 0;
         }
         if (n < 0) {
