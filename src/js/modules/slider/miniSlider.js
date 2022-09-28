@@ -60,19 +60,24 @@ export default class MiniSlider extends Slider {
 
 
     innit() {
-        this.page.style.cssText = `
-        display: flex;
-        justify-content: space-arround;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        overflow: hidden;`;
-        this.showAnotherSlides();
-        this.showFirstSlide();
-        this.showNextSlide();
-        this.showPrevSlide();
-        if (this.autoplay == true) {
-            setInterval(() => this.nextBtn.click(), 5000);
+        try {
+            this.page.style.cssText = `
+            display: flex;
+            justify-content: space-arround;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            overflow: hidden;`;
+            this.showAnotherSlides();
+            this.showFirstSlide();
+            this.showNextSlide();
+            this.showPrevSlide();
+            if (this.autoplay == true) {
+                setInterval(() => this.nextBtn.click(), 5000);
+            }
         }
+        catch (e) { }
+
+
     }
 
 }
