@@ -5023,6 +5023,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_videoPlayer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/videoPlayer */ "./src/js/modules/videoPlayer.js");
 /* harmony import */ var _modules_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/form */ "./src/js/modules/form.js");
 /* harmony import */ var _modules_cards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/cards */ "./src/js/modules/cards.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
 
 
 
@@ -5083,7 +5085,80 @@ window.addEventListener("DOMContentLoaded", function () {
   form1.init();
   var form2 = new _modules_form__WEBPACK_IMPORTED_MODULE_3__["default"](".scheduleForm");
   form2.init();
+  new _modules_accordion__WEBPACK_IMPORTED_MODULE_5__["default"](".module__info-show .plus").init();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Accordion; });
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Accordion =
+/*#__PURE__*/
+function () {
+  function Accordion(triggers) {
+    _classCallCheck(this, Accordion);
+
+    this.triggers = document.querySelectorAll(triggers);
+  }
+
+  _createClass(Accordion, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      this.triggers.forEach(function (trigger) {
+        _this.block = trigger.closest(".module__info-show").nextElementSibling;
+
+        _this.block.classList.add("animated");
+
+        _this.block.style.display = "none";
+      });
+      this.triggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function () {
+          _this.block = trigger.closest(".module__info-show").nextElementSibling;
+
+          _this.block.classList.add("animated");
+
+          if (_this.block.style.display == "none") {
+            _this.block.classList.remove("fadeInUp");
+
+            _this.block.classList.add("fadeInDown");
+
+            _this.block.style.display = "block";
+          } else {
+            _this.block.classList.remove("fadeInDown");
+
+            _this.block.classList.add("fadeInUp");
+
+            _this.block.style.display = "none";
+          }
+        });
+      });
+    }
+  }]);
+
+  return Accordion;
+}();
+
+
 
 /***/ }),
 

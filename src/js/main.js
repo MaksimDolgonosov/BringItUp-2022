@@ -1,10 +1,9 @@
 import MainSlider from "./modules/slider/mainslider";
 import MiniSlider from "./modules/slider/miniSlider";
 import VideoPlayer from "./modules/videoPlayer";
-
 import Forms from "./modules/form";
-
 import Cards from "./modules/cards";
+import Accordion from "./modules/accordion";
 
 
 
@@ -38,6 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const form2 = new Forms(".scheduleForm");
     form2.init();
 
+    new Accordion(".module__info-show .plus").init();
 
 
 });
